@@ -16,7 +16,7 @@ on:
       registry-repositories:
         type: string
         required: true
-        description: 'The Docker registry repositories to push the images to. Separate multiple repositories with a comma (example: docker.io/serversideup/php,ghcr.io/serversideup/php)'
+        description: 'The Docker registry repositories to push the images to. Separate multiple repositories with a comma (example: docker.io/mauriciodulcce/php,ghcr.io/mauriciodulce/php)'
       release-type:
         type: string
         default: 'testing'
