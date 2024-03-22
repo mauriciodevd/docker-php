@@ -94,7 +94,7 @@ if [ "$SKIP_DOWNLOAD" = false ]; then
             ]
         }
         ]
-    }" | yq eval -P -)
+    }" | yq eval  -)
 
     # Save the YAML data in our data standard to a file
     echo "$php_net_yaml_data" > "$DOWNLOADED_PHP_VERSIONS_CONFIG_FILE"
