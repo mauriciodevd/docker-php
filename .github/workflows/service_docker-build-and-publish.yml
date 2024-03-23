@@ -16,7 +16,7 @@ on:
       registry-repositories:
         type: string
         required: true
-        description: 'The Docker registry repositories to push the images to. Separate multiple repositories with a comma (example: docker.io/mauriciodulcce/php,ghcr.io/mauriciodulce/php)'
+        description: 'The Docker registry repositories to push the images to. Separate multiple repositories with a comma (example: docker.io/serversideup/php,ghcr.io/serversideup/php)'
       release-type:
         type: string
         default: 'testing'
@@ -24,7 +24,7 @@ on:
 
 jobs:
   setup-matrix:
-    runs-on: self-hosted
+    runs-on: ubuntu-22.04
     outputs:
       php-version-map-json: ${{ steps.get-php-versions.outputs.php-version-map-json }}
     steps:
@@ -60,7 +60,7 @@ jobs:
 
   docker-publish:
     needs: setup-matrix
-    runs-on: self-hosted
+    runs-on: ubuntu-22.04
     strategy:
       matrix: ${{fromJson(needs.setup-matrix.outputs.php-version-map-json)}}
 
