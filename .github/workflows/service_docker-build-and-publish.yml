@@ -60,6 +60,10 @@ jobs:
 
   docker-publish:
     needs: setup-matrix
-    runs-on: self-hosted
+    runs-on: ubuntu-22.04
     strategy:
       matrix: ${{fromJson(needs.setup-matrix.outputs.php-version-map-json)}}
+
+    steps:
+      - name: Check out code.
+        uses: actions/checkout@v4
