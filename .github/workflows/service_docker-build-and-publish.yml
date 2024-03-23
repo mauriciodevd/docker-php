@@ -58,14 +58,29 @@ jobs:
         name: php-versions.yml
         path: ${{ inputs.php-versions-file }}
 
+
   docker-publish:
     needs: setup-matrix
-    runs-on: self-hosted
-    # strategy:
-    #   matrix: ${{fromJson(needs.setup-matrix.outputs.php-version-map-json)}}
-    steps:
-      - name: Debug output
-        run: echo "${{ needs.setup-matrix.outputs.php-version-map-json }}"
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix: ${{fromJson(needs.setup-matrix.outputs.php-version-map-json)}}
 
+    steps:
       - name: Check out code.
         uses: actions/checkout@v4
+  
+      - name: Download PHP Versions file
+        uses: actions/download-artifact@v4
+        with:
+          name: php-versions.yml
+          path: ./artifacts
+      
+      - name: Move PHP Versions file
+        run: mv ./artifacts/php-versions.yml ${{ inputs.php-versions-file }}
+  # docker-publish:
+  #   needs: setup-matrix
+  #   runs-on: self-hosted
+  #   # strategy:
+  #   #   matrix: ${{fromJson(needs.setup-matrix.outputs.php-version-map-json)}}
+      - name: Debug output
+        run: echo "${{ needs.setup-matrix.outputs.php-version-map-json }}"
