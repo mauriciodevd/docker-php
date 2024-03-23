@@ -94,7 +94,7 @@ if [ "$SKIP_DOWNLOAD" = false ]; then
             ]
         }
         ]
-    }" | yq eval -)
+    }" | yq eval -P -)
 
     # Save the YAML data in our data standard to a file
     echo "$php_net_yaml_data" > "$DOWNLOADED_PHP_VERSIONS_CONFIG_FILE"
@@ -129,7 +129,7 @@ if [ "$SKIP_DOWNLOAD" = false ]; then
     ' <(echo "$downloaded_and_normalized_json_data") <(echo "$base_json_data"))
 
     # Convert updated JSON data back to YAML
-    merged_and_finalized_yaml=$(echo "$merged_json" | yq eval -)
+    merged_and_finalized_yaml=$(echo "$merged_json" | yq eval -P -)
 
     # Save the merged YAML data back to the file
     echo "$merged_and_finalized_yaml" > "$FINAL_PHP_VERSIONS_CONFIG_FILE"
