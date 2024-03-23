@@ -57,3 +57,9 @@ jobs:
       with:
         name: php-versions.yml
         path: ${{ inputs.php-versions-file }}
+
+  docker-publish:
+    needs: setup-matrix
+    runs-on: self-hosted
+    strategy:
+      matrix: ${{fromJson(needs.setup-matrix.outputs.php-version-map-json)}}
